@@ -1,0 +1,62 @@
+h1 {
+  margin: 10px auto;
+}
+
+h4 {
+  margin: 5px auto;
+}
+
+.container {
+  display : flex;
+}
+
+.centered {
+  margin: auto;
+}
+
+.row {
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: space-around;
+}
+
+.column {
+display: flex;
+flex-direction: column;
+flex-wrap: nowrap;
+justify-content: space-around;
+}
+
+.App {
+  /* width:50vh; */
+  min-width: 320px;
+  background: #1E2B34;
+  position:relative;
+  /* text-align: center; */
+}
+
+.App__header {
+  position: fixed;
+  background-color: #2F3D45;
+  color: #CED2D5;
+}
+
+.App__legend{
+  color:#7E878C;
+  background-color: #1E2B34;
+  border-bottom: 2px solid #7E878C;
+}
+
+.dataList{
+  padding-top:80px;
+  color: #CED2D5;
+}
+
+.ask{
+  color: #FF6939 ;
+}
+
+.buy{
+  color: #4DA53C ;
+}
