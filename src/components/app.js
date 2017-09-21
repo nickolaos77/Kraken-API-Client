@@ -1,3 +1,4 @@
+/* eslint-disable react/no-did-mount-set-state */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,7 +9,7 @@ import '../styles/app.css';
 
 // The App Component has as children the Form and List Children
 // both of which have no children. 
-class App extends Component { 
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = { width: null };

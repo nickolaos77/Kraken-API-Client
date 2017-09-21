@@ -5,7 +5,7 @@ import { SUBMIT_BUY_ORDER, SUBMIT_SELL_ORDER } from '../actions/userActions';
 export default function posts(state = { isFetching: false, data: {}, errorMessage: '' }, action) {
   switch (action.type) {
     case REQUEST_MARKET_DATA:
-      return Object.assign({}, state, { isFetching: true }); 
+      return Object.assign({}, state, { isFetching: true });
     case FAILED_TO_RECEIVE_MARKET_DATA:
       return Object.assign({}, state, { isFetching: false, errorMessage: action.message });
     case RECEIVE_MARKET_DATA:
@@ -14,12 +14,12 @@ export default function posts(state = { isFetching: false, data: {}, errorMessag
       // when a sell order is submitted it is inserted it the array of the ask prices
       let newAsks = [...state.data.asks];
       const len = newAsks.length;
-      for (let index = 0; index < len; index++ ) {
+      for (let index = 0; index < len; index += 1) {
         if (+newAsks[index][0] > action.order.price) {
           newAsks = [...newAsks.slice(0, index),
             [action.order.price.toString(), action.order.size.toString()],
             ...newAsks.slice(index)];
-          break;  
+          break;
         }
       }
       const newData = { asks: newAsks, bids: state.data.bids };
@@ -29,7 +29,7 @@ export default function posts(state = { isFetching: false, data: {}, errorMessag
       // when a buy order is submitted it is inserted it the array of the ask prices
       let newBids = [...state.data.bids];
       const len = newBids.length;
-      for (let index = 0; index < len; index++ ) {
+      for (let index = 0; index < len; index += 1) {
         if (+newBids[index][0] < action.order.price) {
           newBids = [...newBids.slice(0, index),
             [action.order.price.toString(), action.order.size.toString()],
