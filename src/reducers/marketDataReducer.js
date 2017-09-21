@@ -8,14 +8,18 @@ export default function posts(state = { isFetching: false, data: {}, errorMessag
       return Object.assign({}, state, { isFetching: true });
     case FAILED_TO_RECEIVE_MARKET_DATA:
       return Object.assign({}, state, { isFetching: false, errorMessage: action.message });
-    case RECEIVE_MARKET_DATA:
-      return Object.assign({}, state, { isFetching: false, data: action.data });
+    case RECEIVE_MARKET_DATA: {
+      const newAsks = action.data.asks.slice();
+      newAsks.reverse();
+      const newData = { asks: newAsks, bids: action.data.bids };
+      return Object.assign({}, state, { isFetching: false, data: newData });
+    }
     case SUBMIT_SELL_ORDER: {
       // when a sell order is submitted it is inserted it the array of the ask prices
       let newAsks = [...state.data.asks];
       const len = newAsks.length;
       for (let index = 0; index < len; index += 1) {
-        if (+newAsks[index][0] > action.order.price) {
+        if (+newAsks[index][0] < action.order.price) {
           newAsks = [...newAsks.slice(0, index),
             [action.order.price.toString(), action.order.size.toString()],
             ...newAsks.slice(index)];
