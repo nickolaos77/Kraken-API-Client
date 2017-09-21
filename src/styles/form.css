@@ -1,0 +1,15 @@
+.btn--buy {
+    background-color: #4DA53C ;
+    border-color: #4DA53C;
+    color: white;
+  }
+  
+  .btn--sell {
+    background-color:  #FF6939 ;
+    border-color:  #FF6939 ;
+    color: white;
+  }
+  
+  .input{
+    width: 70px;
+  }

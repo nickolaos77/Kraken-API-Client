@@ -42,21 +42,21 @@ justify-content: space-around;
   color: #CED2D5;
 }
 
-.App__legend{
+.App__legend {
   color:#7E878C;
   background-color: #1E2B34;
   border-bottom: 2px solid #7E878C;
 }
 
-.dataList{
-  padding-top:80px;
+.dataList {
+  padding-top:120px;
   color: #CED2D5;
 }
 
-.ask{
+.ask {
   color: #FF6939 ;
 }
 
-.buy{
+.buy {
   color: #4DA53C ;
 }

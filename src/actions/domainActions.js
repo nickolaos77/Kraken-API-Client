@@ -1,4 +1,6 @@
 // https://engineering.thetrainline.com/handling-api-calls-in-redux-with-redux-api-middleware-c95c38816e13
+// the structure of the reducers follows the example from the react-redux documentation:
+// http://redux.js.org/docs/advanced/AsyncActions.html
 import fetch from 'isomorphic-fetch';
 
 export const REQUEST_MARKET_DATA = 'REQUEST_MARKET_DATA';
@@ -24,7 +26,7 @@ export function failedToReceiveMarketData(message) {
 export function fetchMarketData() {
   return function dispatcher(dispatch) {
     dispatch(requestMarketData());
-    return fetch('https://cors-anywhere.herokuapp.com/' + 'https://api.kraken.com/0/public/Depth?pair=XBTUSD')
+    return fetch('https://galvanize-cors-proxy.herokuapp.com/' + 'https://api.kraken.com/0/public/Depth?pair=XBTUSD')
       .then((response) => {
         if (response.status >= 400) {
           dispatch(failedToReceiveMarketData('Bad response from server'));

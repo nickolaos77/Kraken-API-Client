@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class List extends Component { 
   constructor(props) {
@@ -8,7 +9,8 @@ class List extends Component {
   }
 
   renderListItems() {
-    if (this.props.marketData && this.props.marketData.data && this.props.marketData.data.asks) {
+    // when data become available show them
+    if ( this.props.marketData.data.asks) {
       const asks = this.props.marketData.data.asks.map((marketItem, index) => (
         <div className="row" key={index.toString()}>
           <p >{marketItem[1]}</p>
@@ -21,13 +23,13 @@ class List extends Component {
           <p >{marketItem[1]}</p>
           <p className="buy">{this.props.marketData.data.bids[index][0]}</p>
         </div>
-      )
+      ),
       );
       return [...asks, ...bids];
     }
-    return <p>fetching users...</p>;
+    return <p>fetching market data...</p>;
   }
-
+  // in every state change the component will be rerendered and the function r
   render() {
     return (
       <div className="dataList">
@@ -37,10 +39,14 @@ class List extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    marketData: state.marketData,
-  };
+const mapStateToProps = state => ({ marketData: state.marketData });
+
+List.propTypes = {
+  marketData: PropTypes.objectOf(PropTypes.shape),
+};
+
+List.defaultProps = {
+  marketData: {},
 };
 
 export default connect(mapStateToProps)(List);
