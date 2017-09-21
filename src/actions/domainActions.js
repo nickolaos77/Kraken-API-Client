@@ -26,6 +26,7 @@ export function failedToReceiveMarketData(message) {
 export function fetchMarketData() {
   return function dispatcher(dispatch) {
     dispatch(requestMarketData());
+    // eslint-disable-next-line
     return fetch('https://galvanize-cors-proxy.herokuapp.com/https://api.kraken.com/0/public/Depth?pair=XBTUSD')
       .then((response) => {
         if (response.status >= 400) {

@@ -1,52 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class List extends Component { 
-  constructor(props) {
-    super(props);
-    this.renderListItems = this.renderListItems.bind(this);
-  }
-
-  renderListItems() {
+const List = (props) => {
+  const renderListItems = () => {
     // when data become available show them
-    if ( this.props.marketData.data.asks) {
-      const asks = this.props.marketData.data.asks.map((marketItem, index) => (
+    if (props.appState.data.asks) {
+      const asks = props.appState.data.asks.map((marketItem, index) => (
         <div className="row" key={index.toString()}>
           <p >{marketItem[1]}</p>
-          <p className="ask">{this.props.marketData.data.asks[index][0]}</p>
+          <p className="ask">{props.appState.data.asks[index][0]}</p>
         </div>
-      )
+      ),
       );
-      const bids = this.props.marketData.data.bids.map((marketItem, index) => (
+      const bids = props.appState.data.bids.map((marketItem, index) => (
         <div className="row" key={`${index.toString()}b`}>
           <p >{marketItem[1]}</p>
-          <p className="buy">{this.props.marketData.data.bids[index][0]}</p>
+          <p className="buy">{props.appState.data.bids[index][0]}</p>
         </div>
       ),
       );
       return [...asks, ...bids];
     }
     return <p>fetching market data...</p>;
-  }
-  // in every state change the component will be rerendered and the function r
-  render() {
-    return (
-      <div className="dataList">
-        {this.renderListItems()}
-      </div>
-    );
-  }
-}
+  };
+  return (
+    <div className="dataList">
+      { renderListItems()}
+    </div>
+  );
+};
 
-const mapStateToProps = state => ({ marketData: state.marketData });
+const mapStateToProps = state => ({ appState: state.appState });
 
 List.propTypes = {
-  marketData: PropTypes.objectOf(PropTypes.shape),
+  appState: PropTypes.objectOf(PropTypes.shape),
 };
 
 List.defaultProps = {
-  marketData: {},
+  appState: {},
 };
 
 export default connect(mapStateToProps)(List);

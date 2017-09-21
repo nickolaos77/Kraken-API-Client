@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import marketData from './marketDataReducer';
+import appState from './marketDataReducer';
 
 const rootReducer = combineReducers({
-  marketData,
+  appState,
 });
 
 export default rootReducer;
