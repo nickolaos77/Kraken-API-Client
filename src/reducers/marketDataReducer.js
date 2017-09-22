@@ -5,14 +5,14 @@ import { SUBMIT_BUY_ORDER, SUBMIT_SELL_ORDER } from '../actions/userActions';
 export default function posts(state = { isFetching: false, data: {}, errorMessage: '' }, action) {
   switch (action.type) {
     case REQUEST_MARKET_DATA:
-      return Object.assign({}, state, { isFetching: true });
+      return { ...state, isFetching: true };
     case FAILED_TO_RECEIVE_MARKET_DATA:
-      return Object.assign({}, state, { isFetching: false, errorMessage: action.message });
+      return { ...state, isFetching: false, errorMessage: action.message };
     case RECEIVE_MARKET_DATA: {
       const newAsks = action.data.asks.slice();
       newAsks.reverse();
       const newData = { asks: newAsks, bids: action.data.bids };
-      return Object.assign({}, state, { isFetching: false, data: newData });
+      return { ...state, isFetching: false, data: newData };
     }
     case SUBMIT_SELL_ORDER: {
       // when a sell order is submitted it is inserted it the array of the ask prices
@@ -27,7 +27,7 @@ export default function posts(state = { isFetching: false, data: {}, errorMessag
         }
       }
       const newData = { asks: newAsks, bids: state.data.bids };
-      return Object.assign({}, state, { data: newData });
+      return { ...state, data: newData };
     }
     case SUBMIT_BUY_ORDER: {
       // when a buy order is submitted it is inserted it the array of the ask prices
@@ -42,7 +42,7 @@ export default function posts(state = { isFetching: false, data: {}, errorMessag
         }
       }
       const newData = { asks: state.data.asks, bids: newBids };
-      return Object.assign({}, state, { data: newData });
+      return { ...state, data: newData };
     }
     default:
       return state;
